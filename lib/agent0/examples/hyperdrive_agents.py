@@ -14,10 +14,10 @@ from fixedpointmath import FixedPoint
 # Define the unique env filename to use for this script
 ENV_FILE = "hyperdrive_agents.account.env"
 # Username binding of bots
-USERNAME = "changeme"
+USERNAME = "jonny"
 # The amount of base token each bot receives
-BASE_BUDGET_PER_BOT = FixedPoint(50).scaled_value  # 50 base in wei
-ETH_BUDGET_PER_BOT = FixedPoint(1).scaled_value  # 1 eth in wei
+BASE_BUDGET_PER_BOT = FixedPoint(100).scaled_value  # 50 base in wei
+ETH_BUDGET_PER_BOT = FixedPoint(100).scaled_value  # 1 eth in wei
 # The slippage tolerance for trades
 SLIPPAGE_TOLERANCE = FixedPoint("0.0001")  # 0.1% slippage
 # Run this file with this flag set to true to close out all open positions
@@ -30,7 +30,7 @@ env_config = EnvironmentConfig(
     log_filename=".logging/agent0_logs.log",
     log_level=logging.CRITICAL,
     log_stdout=True,
-    random_seed=1234,
+    random_seed=1123,
     username=USERNAME,
 )
 
@@ -59,15 +59,15 @@ agent_config: list[AgentConfig] = [
     ),
     AgentConfig(
         policy=Zoo.lp_and_arb,
-        number_of_agents=0,
+        number_of_agents=1,
         slippage_tolerance=None,  # No slippage tolerance for arb bot
         # Fixed budgets
         base_budget_wei=BASE_BUDGET_PER_BOT,
         eth_budget_wei=ETH_BUDGET_PER_BOT,
         policy_config=Zoo.lp_and_arb.Config(
-            lp_portion=FixedPoint("0.5"),  # LP with 50% of capital
-            high_fixed_rate_thresh=FixedPoint(0.01),  # Amount over variable rate to arbitrage
-            low_fixed_rate_thresh=FixedPoint(0.01),  # Amount below variable rate to arbitrage
+            lp_portion=FixedPoint("0.0"),  # LP with 50% of capital
+            high_fixed_rate_thresh=FixedPoint(0.1),  # Amount over variable rate to arbitrage
+            low_fixed_rate_thresh=FixedPoint(0.1),  # Amount below variable rate to arbitrage
         ),
     ),
 ]

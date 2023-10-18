@@ -517,10 +517,10 @@ class LPandArb(HyperdrivePolicy):
 
         # arbitrage from here on out
         high_fixed_rate_detected = (
-            interface.fixed_rate >= interface.variable_rate + self.policy_config.high_fixed_rate_thresh
+            interface.fixed_rate >= FixedPoint("0.035") + self.policy_config.high_fixed_rate_thresh
         )
         low_fixed_rate_detected = (
-            interface.fixed_rate <= interface.variable_rate - self.policy_config.low_fixed_rate_thresh
+            interface.fixed_rate <= FixedPoint("0.035") - self.policy_config.low_fixed_rate_thresh
         )
         we_have_money = wallet.balance.amount >= self.minimum_trade_amount
 
